@@ -1,5 +1,6 @@
 body {
   background-color: #393E46;
+  min-width: 320px;
 }
 
 h1 {
@@ -23,16 +24,27 @@ footer {
   font-family: 'Indie Flower', cursive;
 }
 
+.alert {
+  margin: 10px;
+  color: #fff;
+  border: 1px solid #fd5f60;
+}
+
 .button {
   background: #fd5f60;
   color: #fff;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 30px;
   display: block;
 }
 
 .container {
   text-align: center;
+}
+
+.success {
+  background: #4ECCA3;
+  color: black;
 }
 
 .square-wrapper {
@@ -41,12 +53,16 @@ footer {
   color: #fff;
   max-height: 500px;
   height: 100vw;
+  text-align: left;
 }
 
 .square-wrapper .cell {
   line-height: 110px;
   border: 1px solid #fff;
   cursor: pointer;
+  width: 24%;
+  display: inline-block;
+  text-align: center;
 }
 
 .square-wrapper .row {
