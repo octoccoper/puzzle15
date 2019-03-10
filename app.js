@@ -1,9 +1,29 @@
 document.addEventListener("DOMContentLoaded", initGame);
 
+function initGame() {
 
-class UI {
-    constructor(data) {
+    // init game object
+    let game = new Game();
+
+    // paint the shuffled array
+    game.drawSquare(game.initArray);
+
+    // load event listeners for object of class Game
+    game.loadEventsListeners();
+
+}
+
+class Game {
+    constructor(data, initArray, successMessage) {
+
+        // all html data
         this.data = document.getElementById("game-field");
+
+        // array with all numbers
+        this.initArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+        // message that user see if he win the game
+        this.successMessage = "Congratulations! You win!";
     }
 
     // function that paint the game square with cells
@@ -16,7 +36,7 @@ class UI {
             htmlData += `<div class="cell">${arr[i]}</div>`
         }
 
-        htmlData += `<button class="button" type="button" name="button">Start</button></div>`;
+        htmlData += `<button class="button" id="start-btn" type="button" name="button">Start</button></div>`;
 
         return this.data.innerHTML = htmlData;
     }
@@ -36,10 +56,10 @@ class UI {
         }, 9000);
     }
 
-}
+    loadEventsListeners() {
+        document.getElementById("start-btn").addEventListener("click", btnStartClick);
+    }
 
-class Game {
-    start() {}
     shuffleData(arr) {
         // this function is an examlpe of Fisher–Yates shuffle
 
@@ -67,24 +87,13 @@ class Game {
 
 }
 
-function initGame() {
-    // array with all numbers
-    let initArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-    // message that user see if he win the game
-    let successMessage = "Congratulations! You win!";
-
-    // init game object
-    let game = new Game();
-
+function btnStartClick(Game) {
     // shuffle initial array
-    let newArr = game.shuffleData(initArray);
-
-
-    // init ui object
-    let ui = new UI();
+    let newArr = game.shuffleData(this.initArray);
 
     // paint the shuffled array
-    ui.drawSquare(newArr);
+    game.drawSquare(newArr);
 
 }
+

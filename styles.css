@@ -30,7 +30,7 @@ footer {
   border: 1px solid #fd5f60;
 }
 
-.button {
+button.button {
   background: #fd5f60;
   color: #fff;
   margin: 0 auto;
