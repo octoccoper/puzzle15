@@ -61,11 +61,25 @@ button.button {
   line-height: 110px;
   border: 1px solid #fff;
   cursor: pointer;
-  width: 24%;
+  width: 23%;
   display: inline-block;
   text-align: center;
+  margin: 4px;
+  box-sizing: border-box;
+}
+
+.cell:hover {
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+  background: #fd5f60;
 }
 
 .no-value {
   border: none;
+}
+
+.no-events {
+  pointer-events: none;
 }

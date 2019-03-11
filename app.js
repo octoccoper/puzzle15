@@ -21,9 +21,9 @@ class Game {
 
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] !== null) {
-                htmlData += `<div class="cell">${arr[i]}</div>`
+                htmlData += `<div class="cell" id="cell-${i}">${arr[i]}</div>`
             } else {
-                htmlData += `<div class="cell no-value"></div>`
+                htmlData += `<div class="cell no-value" id="cell-${i}"></div>`
             }
         }
 
@@ -71,15 +71,29 @@ class Game {
     }
 
     loadEventsListeners() {
+        // Add event listener for button
         document.getElementById("start-btn").addEventListener("click", () => {
             let newArr = this.shuffleData(this.initArray);
             this.drawSquare(newArr);
+
+            this.data.classList = "container";
+
+            // Add event listeners for cells on the square
+            let cells = document.getElementsByClassName("cell");
+
+            for (let i = 0; i < cells.length; i++) {
+                cells[i].addEventListener("click", this.moveCell);
+            }
         });
 
-        console.log("load event lisrt");
+
     }
-    
-    moveCell() {}
+
+    moveCell() {
+        let currentIndex = window.event.target.id;
+        console.log(currentIndex);
+    }
+
     checkResult() {}
 
 }
@@ -99,4 +113,3 @@ function initGame() {
     game.loadEventsListeners();
 
 }
-
