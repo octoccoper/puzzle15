@@ -1,18 +1,5 @@
 document.addEventListener("DOMContentLoaded", initGame);
 
-function initGame() {
-
-    // init game object
-    let game = new Game();
-
-    // paint the shuffled array
-    game.drawSquare(game.initArray);
-
-    // load event listeners for object of class Game
-    game.loadEventsListeners();
-
-}
-
 class Game {
     constructor(data, initArray, successMessage) {
 
@@ -20,7 +7,7 @@ class Game {
         this.data = document.getElementById("game-field");
 
         // array with all numbers
-        this.initArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        this.initArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null];
 
         // message that user see if he win the game
         this.successMessage = "Congratulations! You win!";
@@ -33,10 +20,14 @@ class Game {
         <div class="square-wrapper">`;
 
         for (let i = 0; i < arr.length; i++) {
-            htmlData += `<div class="cell">${arr[i]}</div>`
+            if (arr[i] !== null) {
+                htmlData += `<div class="cell">${arr[i]}</div>`
+            } else {
+                htmlData += `<div class="cell no-value"></div>`
+            }
         }
 
-        htmlData += `<button class="button" id="start-btn" type="button" name="button">Start</button></div>`;
+        htmlData += `</div>`;
 
         return this.data.innerHTML = htmlData;
     }
@@ -54,10 +45,6 @@ class Game {
         setTimeout(function () {
             document.querySelector(".alert").remove();
         }, 9000);
-    }
-
-    loadEventsListeners() {
-        document.getElementById("start-btn").addEventListener("click", btnStartClick);
     }
 
     shuffleData(arr) {
@@ -82,18 +69,34 @@ class Game {
 
         return arr;
     }
+
+    loadEventsListeners() {
+        document.getElementById("start-btn").addEventListener("click", () => {
+            let newArr = this.shuffleData(this.initArray);
+            this.drawSquare(newArr);
+        });
+
+        console.log("load event lisrt");
+    }
+    
     moveCell() {}
     checkResult() {}
 
 }
 
 
-function btnStartClick(Game) {
-    // shuffle initial array
-    let newArr = game.shuffleData(this.initArray);
+function initGame() {
+
+    let that = this;
+
+    // init game object
+    let game = new Game();
 
     // paint the shuffled array
-    game.drawSquare(newArr);
+    game.drawSquare(game.initArray);
+
+    // load event listeners for object of class Game
+    game.loadEventsListeners();
 
 }
 
