@@ -29,21 +29,6 @@ class Game {
         return this.data.innerHTML = htmlData;
     }
 
-    // function that draw the message 
-    showMessage(message) {
-        const div = document.createElement("div");
-        div.className = 'alert success';
-        div.appendChild(document.createTextNode(message));
-
-        const container = document.querySelector(".container");
-        const squareWrap = document.querySelector(".square-wrapper");
-        container.insertBefore(div, squareWrap);
-
-        setTimeout(function () {
-            document.querySelector(".alert").remove();
-        }, 9000);
-    }
-
     shuffleData(arr) {
         // this function is an examlpe of Fisher–Yates shuffle
 
@@ -121,6 +106,51 @@ class Game {
 
             // Message that user see if he win the game
             let successMessage = "Congratulations! You win! Take a cookie.";
+
+            // Get node list with cells
+            let tableData = document.querySelectorAll(".square-wrapper .cell");
+
+            // Array for cells data
+            let tableArr = [];
+
+            // Add values for array from table cells
+            for (let i = 0; i < tableData.length; i++) {
+
+                if (tableData[i].textContent == 'null') {
+                    tableArr[i] = '';
+                } else {
+                    tableArr[i] = +(tableData[i].textContent);
+                }
+
+            }
+
+            // Combine array with values into string
+            let result = tableArr.join('');
+
+            // Check if the string with values is a winner combination
+            for (let i = 0; i < winnerPatterns.length; i++) {
+                if (winnerPatterns[i] === result) {
+                    showMessage(successMessage);
+                    document.getElementById("game-field").classList = "container no-events";
+                }
+            }
+
+
+            // function that draw the message 
+            function showMessage(message) {
+                const div = document.createElement("div");
+                div.className = 'alert success';
+                div.appendChild(document.createTextNode(message));
+
+                const container = document.querySelector(".container");
+                const squareWrap = document.querySelector(".square-wrapper");
+                container.insertBefore(div, squareWrap);
+
+                setTimeout(function () {
+                    document.querySelector(".alert").remove();
+                }, 9000);
+            }
+
         }
     }
 }
