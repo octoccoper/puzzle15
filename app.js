@@ -84,13 +84,13 @@ class Game {
         });
     }
 
-    moveCell() {
-        let currencurrentCell = window.event.target,
+    moveCell(event) {
+        let currencurrentCell = event.target,
             currentCellIndex = currencurrentCell.cellIndex,
             emptyCellElem = document.querySelector(".no-value"),
             emptyCellIndex = emptyCellElem.cellIndex;
 
-        if (!window.event.target.classList.contains('no-value')) {
+        if (!event.target.classList.contains('no-value')) {
             switch (currentCellIndex - emptyCellIndex) {
                 case -1:
                     swapElements(currencurrentCell, emptyCellElem);
