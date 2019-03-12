@@ -67,6 +67,7 @@ td.cell {
   box-sizing: border-box;
   height: 114px;
   padding: 12px 15px;
+  font-size: 40px;
 }
 
 .cell:hover {
@@ -84,4 +85,25 @@ td.cell {
 
 .no-events {
   pointer-events: none;
+}
+
+
+@media (max-width: 600px) {
+  div.container {
+    width: 100%;
+  }
+
+  .square-wrapper {
+    max-width: 100vw;
+    max-height: unset;
+    height: 100vw;
+  }
+
+  td.cell {
+    line-height: 22vw;
+    height: 22vw;
+    font-size: 10vw;
+    padding: 0;
+    margin: 2px;
+  }
 }
