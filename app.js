@@ -14,7 +14,7 @@ class Game {
     drawSquare(arr) {
         let htmlData = `
         <h1>15 puzzle</h1>
-        <table class="square-wrapper"><tr>`;
+        <table class="square-wrapper"><tbody><tr>`;
 
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] !== null) {
@@ -24,7 +24,7 @@ class Game {
             }
         }
 
-        htmlData += `</tr></table>`;
+        htmlData += `</tr></tbody></table>`;
 
         return this.data.innerHTML = htmlData;
     }
