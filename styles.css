@@ -24,6 +24,13 @@ footer {
   font-family: 'Indie Flower', cursive;
 }
 
+td:first-child,
+td:last-child,
+  {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .alert {
   margin: 10px;
   color: #fff;
@@ -58,7 +65,7 @@ button.button {
 }
 
 .cell {
-  line-height: 110px;
+  line-height: 93px;
   border: 1px solid #fff;
   cursor: pointer;
   width: 23%;
@@ -66,6 +73,7 @@ button.button {
   text-align: center;
   margin: 4px;
   box-sizing: border-box;
+  height: 114px;
 }
 
 .cell:hover {
@@ -78,6 +86,7 @@ button.button {
 
 .no-value {
   border: none;
+  visibility: hidden;
 }
 
 .no-events {

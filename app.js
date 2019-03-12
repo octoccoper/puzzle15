@@ -1,33 +1,30 @@
 document.addEventListener("DOMContentLoaded", initGame);
 
 class Game {
-    constructor(data, initArray, successMessage) {
+    constructor(data, initArray) {
 
         // all html data
         this.data = document.getElementById("game-field");
 
         // array with all numbers
         this.initArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null];
-
-        // message that user see if he win the game
-        this.successMessage = "Congratulations! You win!";
     }
 
     // function that paint the game square with cells
     drawSquare(arr) {
         let htmlData = `
         <h1>15 puzzle</h1>
-        <div class="square-wrapper">`;
+        <table class="square-wrapper"><tr>`;
 
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] !== null) {
-                htmlData += `<div class="cell" id="cell-${i}">${arr[i]}</div>`
+                htmlData += `<td class="cell">${arr[i]}</td>`
             } else {
-                htmlData += `<div class="cell no-value" id="cell-${i}"></div>`
+                htmlData += `<td class="cell no-value">${arr[i]}</td>`
             }
         }
 
-        htmlData += `</div>`;
+        htmlData += `</tr></table>`;
 
         return this.data.innerHTML = htmlData;
     }
@@ -90,11 +87,49 @@ class Game {
     }
 
     moveCell() {
-        let currentIndex = window.event.target.id;
-        console.log(currentIndex);
+        let currentCellIndex = window.event.target.cellIndex,
+            emptyCellElem = document.querySelector(".no-value"),
+            emptyCellIndex = emptyCellElem.cellIndex;
+
+        if (!window.event.target.classList.contains('no-value')) {
+
+            console.log("currentCellIndex=", currentCellIndex);
+            console.log("emptyCellIndex=", emptyCellIndex);
+            console.log("currentCellIndex - emptyCellIndex=", currentCellIndex - emptyCellIndex);
+
+            switch (currentCellIndex - emptyCellIndex) {
+                case -1:
+                    swapElements(emptyCellElem, window.event.target);
+                case 1:
+                    swapElements(window.event.target, emptyCellElem);
+                case 4:
+                case -4:
+                    swapElements(emptyCellElem, window.event.target);
+            }
+
+           
+
+        }
+
+        function swapElements(a, b) {
+            let p1 = a.parentNode,
+                p2 = b.parentNode,
+                sib = b.nextSibling;
+            // Change elements places
+            if (sib === a) sib = sib.nextSibling;
+            p1.replaceChild(b, a);
+            if (sib) p2.insertBefore(a, sib);
+            else p2.appendChild(a);
+        }
     }
 
-    checkResult() {}
+    checkResult() {
+        // Winner combinations
+        const winnerPatterns = ['123456789101112131415 ', ' 123456789101112131415', '159132610143711154812 '];
+
+        // Message that user see if he win the game
+        let successMessage = "Congratulations! You win! Take a cookie.";
+    }
 
 }
 
