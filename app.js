@@ -82,33 +82,26 @@ class Game {
                 cells[i].addEventListener("click", this.moveCell);
             }
         });
-
-
     }
 
     moveCell() {
-        let currentCellIndex = window.event.target.cellIndex,
+        let currencurrentCell = window.event.target,
+            currentCellIndex = currencurrentCell.cellIndex,
             emptyCellElem = document.querySelector(".no-value"),
             emptyCellIndex = emptyCellElem.cellIndex;
 
         if (!window.event.target.classList.contains('no-value')) {
-
-            console.log("currentCellIndex=", currentCellIndex);
-            console.log("emptyCellIndex=", emptyCellIndex);
-            console.log("currentCellIndex - emptyCellIndex=", currentCellIndex - emptyCellIndex);
-
             switch (currentCellIndex - emptyCellIndex) {
                 case -1:
-                    swapElements(emptyCellElem, window.event.target);
+                    swapElements(currencurrentCell, emptyCellElem);
+                    checkResult();
+                    break;
                 case 1:
-                    swapElements(window.event.target, emptyCellElem);
                 case 4:
                 case -4:
-                    swapElements(emptyCellElem, window.event.target);
+                    swapElements(emptyCellElem, currencurrentCell);
+                    checkResult();
             }
-
-           
-
         }
 
         function swapElements(a, b) {
@@ -121,16 +114,15 @@ class Game {
             if (sib) p2.insertBefore(a, sib);
             else p2.appendChild(a);
         }
+
+        function checkResult() {
+            // Winner combinations
+            const winnerPatterns = ['123456789101112131415 ', ' 123456789101112131415', '159132610143711154812 '];
+
+            // Message that user see if he win the game
+            let successMessage = "Congratulations! You win! Take a cookie.";
+        }
     }
-
-    checkResult() {
-        // Winner combinations
-        const winnerPatterns = ['123456789101112131415 ', ' 123456789101112131415', '159132610143711154812 '];
-
-        // Message that user see if he win the game
-        let successMessage = "Congratulations! You win! Take a cookie.";
-    }
-
 }
 
 
