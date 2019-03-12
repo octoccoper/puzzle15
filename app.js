@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", initGame);
 
 class Game {
-    constructor(data, initArray) {
+    constructor(data, initArray) { // what are these parameters for?
 
         // all html data
         this.data = document.getElementById("game-field");
@@ -49,19 +49,19 @@ class Game {
             arr[index] = temp;
         }
 
-        return arr;
+        return arr; // the original arr is already updated, you don't need to return it
     }
 
     loadEventsListeners() {
         // Add event listener for button
         document.getElementById("start-btn").addEventListener("click", () => {
-            let newArr = this.shuffleData(this.initArray);
+            let newArr = this.shuffleData(this.initArray); // use const
             this.drawSquare(newArr);
 
             this.data.classList = "container";
 
             // Add event listeners for cells on the square
-            let cells = document.getElementsByClassName("cell");
+            let cells = document.getElementsByClassName("cell"); // use const
 
             for (let i = 0; i < cells.length; i++) {
                 cells[i].addEventListener("click", this.moveCell);
@@ -70,7 +70,7 @@ class Game {
     }
 
     moveCell(event) {
-        let currencurrentCell = event.target,
+        let currencurrentCell = event.target, // const doesn't make objects immutable, so you can use it for arrays and objects
             currentCellIndex = currencurrentCell.cellIndex,
             emptyCellElem = document.querySelector(".no-value"),
             emptyCellIndex = emptyCellElem.cellIndex;
@@ -87,10 +87,11 @@ class Game {
                     swapElements(emptyCellElem, currencurrentCell);
                     checkResult();
             }
+            // you call checkResult in all cases, so you can put it after the switch-case
         }
 
         function swapElements(a, b) {
-            let p1 = a.parentNode,
+            let p1 = a.parentNode, // the same for Nodes, you can use const
                 p2 = b.parentNode,
                 sib = b.nextSibling;
             // Change elements places
@@ -105,13 +106,13 @@ class Game {
             const winnerPatterns = ['123456789101112131415 ', ' 123456789101112131415', '159132610143711154812 '];
 
             // Message that user see if he win the game
-            let successMessage = "Congratulations! You win! Take a cookie.";
+            let successMessage = "Congratulations! You win! Take a cookie."; // const
 
             // Get node list with cells
-            let tableData = document.querySelectorAll(".square-wrapper .cell");
+            let tableData = document.querySelectorAll(".square-wrapper .cell"); // const
 
             // Array for cells data
-            let tableArr = [];
+            let tableArr = []; // and so on...
 
             // Add values for array from table cells
             for (let i = 0; i < tableData.length; i++) {
@@ -158,7 +159,7 @@ class Game {
 
 function initGame() {
 
-    let that = this;
+    let that = this; // what for?
 
     // init game object
     let game = new Game();
