@@ -3,14 +3,6 @@ body {
   min-width: 320px;
 }
 
-h1 {
-  margin: 30px;
-  font-family: 'Lobster', cursive;
-  text-shadow: 5px 0 #232931;
-  font-size: 8rem;
-  color: #4ECCA3;
-}
-
 p {
   font-size: 2rem;
   color: #4ECCA3;
@@ -78,6 +70,14 @@ td.cell {
   background: #fd5f60;
 }
 
+.title {
+  margin: 30px;
+  font-family: 'Lobster', cursive;
+  text-shadow: 5px 0 #232931;
+  font-size: 8rem;
+  color: #4ECCA3;
+}
+
 .no-value {
   border: none;
   visibility: hidden;
@@ -105,5 +105,11 @@ td.cell {
     font-size: 10vw;
     padding: 0;
     margin: 2px;
+  }
+}
+
+@media (max-width: 425px) {
+  .title {
+    margin: 50px 0;
   }
 }

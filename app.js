@@ -1,19 +1,14 @@
 document.addEventListener("DOMContentLoaded", initGame);
 
 class Game {
-    constructor(data, initArray) {
-
-        // all html data
-        this.data = document.getElementById("game-field");
-
-        // array with all numbers
-        this.initArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null];
-    }
 
     // function that paint the game square with cells
     drawSquare(arr) {
+        // all html data
+        let data = document.getElementById("game-field");
+
         let htmlData = `
-        <h1>15 puzzle</h1>
+        <h1 class="title">15 puzzle</h1>
         <table class="square-wrapper"><tbody><tr>`;
 
         for (let i = 0; i < arr.length; i++) {
@@ -26,11 +21,11 @@ class Game {
 
         htmlData += `</tr></tbody></table>`;
 
-        return this.data.innerHTML = htmlData;
+        return data.innerHTML = htmlData;
     }
 
+    // this function is an examlpe of Fisher–Yates shuffle
     shuffleData(arr) {
-        // this function is an examlpe of Fisher–Yates shuffle
 
         let counter = arr.length;
 
@@ -53,16 +48,23 @@ class Game {
     }
 
     loadEventsListeners() {
+
+        // array with all numbers
+        const initArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null];
+
         // Add event listener for button
         document.getElementById("start-btn").addEventListener("click", () => {
-            let newArr = this.shuffleData(this.initArray);
+            const newArr = this.shuffleData(initArray);
             this.drawSquare(newArr);
 
-            this.data.classList = "container";
+            // Find html container and change class for it
+            let data = document.getElementById("game-field");
+            data.classList = "container";
 
             // Add event listeners for cells on the square
-            let cells = document.getElementsByClassName("cell");
+            const cells = document.getElementsByClassName("cell");
 
+            // Add event listener 'click' for every cell in the table
             for (let i = 0; i < cells.length; i++) {
                 cells[i].addEventListener("click", this.moveCell);
             }
@@ -70,7 +72,7 @@ class Game {
     }
 
     moveCell(event) {
-        let currencurrentCell = event.target,
+        const currencurrentCell = event.target,
             currentCellIndex = currencurrentCell.cellIndex,
             emptyCellElem = document.querySelector(".no-value"),
             emptyCellIndex = emptyCellElem.cellIndex;
@@ -79,18 +81,17 @@ class Game {
             switch (currentCellIndex - emptyCellIndex) {
                 case -1:
                     swapElements(currencurrentCell, emptyCellElem);
-                    checkResult();
                     break;
                 case 1:
                 case 4:
                 case -4:
                     swapElements(emptyCellElem, currencurrentCell);
-                    checkResult();
             }
+            checkResult();
         }
 
         function swapElements(a, b) {
-            let p1 = a.parentNode,
+            const p1 = a.parentNode,
                 p2 = b.parentNode,
                 sib = b.nextSibling;
             // Change elements places
@@ -105,13 +106,13 @@ class Game {
             const winnerPatterns = ['123456789101112131415 ', ' 123456789101112131415', '159132610143711154812 '];
 
             // Message that user see if he win the game
-            let successMessage = "Congratulations! You win! Take a cookie.";
+            const successMessage = "Congratulations! You win! Take a cookie.";
 
             // Get node list with cells
-            let tableData = document.querySelectorAll(".square-wrapper .cell");
+            const tableData = document.querySelectorAll(".square-wrapper .cell");
 
             // Array for cells data
-            let tableArr = [];
+            const tableArr = [];
 
             // Add values for array from table cells
             for (let i = 0; i < tableData.length; i++) {
@@ -125,7 +126,7 @@ class Game {
             }
 
             // Combine array with values into string
-            let result = tableArr.join('');
+            const result = tableArr.join('');
 
             // Check if the string with values is a winner combination
             for (let i = 0; i < winnerPatterns.length; i++) {
@@ -158,13 +159,14 @@ class Game {
 
 function initGame() {
 
-    let that = this;
+    // array with all numbers
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null];
 
     // init game object
     let game = new Game();
 
     // paint the shuffled array
-    game.drawSquare(game.initArray);
+    game.drawSquare(arr);
 
     // load event listeners for object of class Game
     game.loadEventsListeners();
