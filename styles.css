@@ -60,6 +60,10 @@ td.cell {
   height: 114px;
   padding: 12px 15px;
   font-size: 40px;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
 }
 
 .cell:hover {
